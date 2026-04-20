@@ -1,0 +1,11 @@
+Code
+Firefly Algorithm: There are three different python files: utils.py, firefly.py, run_firefly_experiment.py. All these files are complete
+
+Result Generation
+Firefly Algorithm: It is being tested on the Iris dataset using 10 trials. For each run, runtime, sum of squared errors (SSE) and Silhouette Scores are being recorded, which allows us to compare both the efficiency and quality of the clustering results. Three graphs are generated to show how the algorithm groups data.
+
+Experience
+Firefly Algorithm: It has been a challenge to understand and implement the algorithm. Unlike an algorithm such as K-means, it’s not built into Python, so I had to write it from scratch. YouTube, articles, and AI tools have been very useful.
+
+Next Step:
+Compare results of all the algorithms.
