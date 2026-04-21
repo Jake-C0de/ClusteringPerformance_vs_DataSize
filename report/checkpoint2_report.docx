@@ -1,11 +1,43 @@
-Code
-Firefly Algorithm: There are three different python files: utils.py, firefly.py, run_firefly_experiment.py. All these files are complete
+Team Members: Patriya Murray, Nevaeh Zumbrun, Jake Batton  
 
-Result Generation
-Firefly Algorithm: It is being tested on the Iris dataset using 10 trials. For each run, runtime, sum of squared errors (SSE) and Silhouette Scores are being recorded, which allows us to compare both the efficiency and quality of the clustering results. Three graphs are generated to show how the algorithm groups data.
+ 
 
-Experience
-Firefly Algorithm: It has been a challenge to understand and implement the algorithm. Unlike an algorithm such as K-means, it’s not built into Python, so I had to write it from scratch. YouTube, articles, and AI tools have been very useful.
+Code 
 
-Next Step:
-Compare results of all the algorithms.
+Firefly Algorithm: There are three files: utils.py, firefly.py, run_firefly_experiment.py. All these files are complete 
+
+K-Means: There is one file k-means.py. This file is complete. 
+
+DBSCAN: There are two files: dbscan.py and dbscan_graphs.py. Both files are complete. 
+
+ 
+
+Result Generation 
+
+Firefly Algorithm: It is being tested on the Iris dataset using 10 trials. For each run, runtime, sum of squared errors (SSE) and Silhouette Scores are being recorded, which allows us to compare both the efficiency and quality of the clustering results. Three graphs are generated to show how the algorithm groups data. 
+
+K-Means Algorithm: It is tested on the Iris dataset. For each run, it generates a graph showing the resulting clusters, and the runtime is printed in the user’s terminal.  
+
+DBSCAN Algorithm: It is tested on the Iris dataset using multiple parameter settings. For each run, runtime, number of clusters, number of noise points, and silhouette scores are being recorded. It also generates four different graphs: runtime, cluster, noise, and quality.  
+
+ 
+
+Decisions for Experimentation: 
+
+We used the Iris set due to its small size and numerical elements. We thought this would be a good set to start out and test our algorithms for working functionality (do they work?). As for a coding language, we decided to use python for its well-documented nature and compatibility with Matplotlib and other algorithms.  
+
+  
+
+Experience 
+
+Firefly Algorithm: It has been a challenge to understand and implement the algorithm. Unlike an algorithm such as K-means, it’s not built into Python, so I had to write it from scratch. YouTube, articles, and AI tools have been very useful. 
+
+K-Means: Creating and implementing K-means was simple. Since K-means is very well documented, the python code was readably available online. Matplotlib was used to make the graph.  
+
+DBSCAN: I would say that the difficulty of understanding and implementing this algorithm is harder than K-Means but easier than Firefly. It was difficult to understand how density-based clustering works. And I learned about noise points for the first time. 
+
+ 
+
+Next Step: 
+
+Compare results of all the algorithms. 
