@@ -1,7 +1,7 @@
 # -------------------------
 # How to Run: 
 # 1) Install matplotpib scikit-learn (pip install matplotlib scikit-learn)
-# 2) python kmeans.py
+# 2) python k-means.py
 # -------------------------
 
 import matplotlib.pyplot as plt
@@ -57,7 +57,7 @@ plt.scatter(X[:, 0], X[:, 1], c=labels)
 plt.xlabel("Sepal Length")
 plt.ylabel("Sepal Width")
 plt.title("K-means Clustering (k=3)")
-plt.savefig("graphs/kmeansclustering.png")
+plt.savefig("../graphs/kmeans_iris_graphs/kmeansclustering.png")
 
 # -------------------------
 # 2. Runtime Graph
@@ -67,7 +67,7 @@ plt.plot(k_values, runtimes, marker='o')
 plt.xlabel("Number of Clusters (k)")
 plt.ylabel("Runtime (seconds)")
 plt.title("Runtime vs K")
-plt.savefig("graphs/kmeansruntime.png")
+plt.savefig("../graphs/kmeans_iris_graphs/kmeansruntime.png")
 
 # -------------------------
 # 3. Silhouette Score Graph
@@ -77,7 +77,7 @@ plt.plot(k_values, sil_scores, marker='o')
 plt.xlabel("Number of Clusters (k)")
 plt.ylabel("Silhouette Score")
 plt.title("Silhouette Score vs K")
-plt.savefig("graphs/kmeanssilhouette.png")
+plt.savefig("../graphs/kmeans_iris_graphs/kmeanssilhouette.png")
 
 # -------------------------
 # 4. Memory Usage Graph
@@ -87,6 +87,6 @@ plt.plot(k_values, memories, marker='o')
 plt.xlabel("Number of Clusters (k)")
 plt.ylabel("Memory Usage (MB)")
 plt.title("Memory Usage vs K")
-plt.savefig("graphs/kmeansmemory.png")
+plt.savefig("../graphs/kmeans_iris_graphs/kmeansmemory.png")
 
 plt.show()
