@@ -1,0 +1,6 @@
+algorithm,dataset,n,runtime_seconds,memory_mb,sse,silhouette_score
+Firefly,Synthetic,200,8.0815,0.0182,3253.3943,0.8061
+Firefly,Synthetic,500,20.1623,0.0091,9154.7812,0.8335
+Firefly,Synthetic,1000,40.1018,0.0365,23441.4124,0.7568
+Firefly,Synthetic,2000,80.1768,0.0208,37202.1877,0.7038
+Firefly,Synthetic,5000,201.4258,0.1406,107931.17,0.7593
