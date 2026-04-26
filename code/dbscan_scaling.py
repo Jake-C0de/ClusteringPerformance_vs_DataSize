@@ -40,7 +40,7 @@ def main():
     # Keep DBSCAN parameters fixed (important!)
     eps = 0.5
     min_samples = 5
-    num_trials = 3
+    num_trials = 10
 
     # -----------------------------------
     # STEP 2: setup paths
