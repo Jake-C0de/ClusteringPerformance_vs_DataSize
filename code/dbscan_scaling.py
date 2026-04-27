@@ -9,6 +9,28 @@ from sklearn.cluster import DBSCAN
 from sklearn.metrics import silhouette_score
 
 
+"""
+HOW TO RUN DBSCAN SCALING EXPERIMENT
+
+1. Open a terminal in the project root directory
+
+2. Install required packages (only needed once):
+   pip install numpy pandas scikit-learn psutil
+
+3. Run the script:
+   python code/dbscan_scaling.py
+
+4. What this program does:
+   - Generates synthetic datasets of increasing size
+   - Runs DBSCAN multiple times (10 trials per size)
+   - Measures runtime, memory usage, clustering quality
+
+5. Output:
+   - Raw results saved to: results/dbscan_scaling_raw.csv
+   - Summary results saved to: results/dbscan_scaling_summary.csv
+"""
+
+
 # -----------------------------------
 # Safe silhouette function (same as before)
 # -----------------------------------
@@ -41,6 +63,7 @@ def main():
     eps = 0.5
     min_samples = 5
     num_trials = 10
+
 
     # -----------------------------------
     # STEP 2: setup paths
@@ -118,16 +141,16 @@ def main():
                 "silhouette_score": sil
             })
 
-    # -----------------------------------
-    # STEP 5: save results
-    # -----------------------------------
+    
+# STEP 5: save results
+# -----------------------------------
     df = pd.DataFrame(results)
+
+    # remove negative memory values caused by measurement noise
+    df["memory_mb"] = df["memory_mb"].clip(lower=0)
 
     raw_path = os.path.join(results_dir, "dbscan_scaling_raw.csv")
     df.to_csv(raw_path, index=False)
-
-    print("\nRAW RESULTS:")
-    print(df)
 
     # -----------------------------------
     # STEP 6: average results by n

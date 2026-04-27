@@ -3,6 +3,30 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
+
+"""
+HOW TO GENERATE DBSCAN SCALING GRAPHS
+
+1. Make sure dbscan_scaling.py has already been run
+
+2. Open a terminal in the project root directory
+
+3. Run the script:
+   python code/dbscan_scaling_graphs.py
+
+4. What this program does:
+   - Reads summary CSV results
+   - Generates graphs for:
+       runtime
+       memory usage
+       silhouette score
+       number of clusters
+       noise points
+
+5. Output:
+   - Graphs saved to: graphs/dbscan_scaling_graphs/
+"""
+
 def plot_scaling_metric(df, metric_col, y_label, title, output_path):
     plt.figure(figsize=(8, 6))
 

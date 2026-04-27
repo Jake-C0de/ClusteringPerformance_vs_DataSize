@@ -22,6 +22,27 @@ from sklearn.metrics import silhouette_score
 from utils import load_iris_data
 
 
+"""
+HOW TO RUN DBSCAN ON IRIS DATASET
+
+1. Open a terminal in the project root directory
+
+2. Install required packages (only needed once):
+   pip install numpy pandas matplotlib scikit-learn
+
+3. Run the script:
+   python code/dbscan_iris.py
+
+4. What this program does:
+   - Runs DBSCAN with different eps and min_samples values
+   - Measures clustering performance using silhouette score
+
+5. Output:
+   - Results saved to: results/dbscan_iris_results.csv
+   - Graphs saved to: graphs/
+"""
+
+
 # this function makes sure silhouette score does not crash
 def safe_silhouette_score(X, labels):
 
