@@ -77,7 +77,7 @@ The algorithms used in this project are:
 ---
 
 ## Install Required Libraries
-pip install numpy pandas matplotlib scikit-learn
+pip install numpy pandas matplotlib scikit-learn psutil
 
 # Running the Code
 
