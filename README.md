@@ -80,7 +80,7 @@ The algorithms used in this project are:
 pip install numpy pandas matplotlib scikit-learn psutil
 
 # Running the Code
-
+Make sure you are in the project root directory
 ## Run Iris Experiments
 python code/k-means.py
 python code/dbscan_Iris.py
