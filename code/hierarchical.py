@@ -1,11 +1,26 @@
 # Purpose: runs the Hierarchical Clustering experiment on the Iris dataset (n = 150),
 # records results, saves CSV files, and generates Iris-only graphs.
+#
+# HOW TO RUN:
+#   Open terminal in the project folder, then run:
+#
+#       py code/hierarchical.py
+#
+# REQUIRED PACKAGES:
+#   If packages are missing, run:
+#
+#       pip install numpy pandas matplotlib scikit-learn
+#
+# NOTE:
+#   Memory is NOT recorded for Iris because the dataset size does not change.
+#   Memory by trial can look misleading, so Iris focuses on runtime, SSE,
+#   silhouette score, and the cluster graph.
 
 """
 What this script does:
 1. loads the Iris dataset
 2. runs Hierarchical Clustering multiple times (10 trials)
-3. records runtime, memory, SSE, and silhouette score
+3. records runtime, SSE, and silhouette score
 4. saves raw and summary results
 5. prints results
 6. generates ONLY Iris graphs
@@ -13,7 +28,6 @@ What this script does:
 
 import os
 import time
-import psutil
 import numpy as np
 import pandas as pd
 from sklearn.cluster import AgglomerativeClustering
@@ -60,22 +74,14 @@ def main():
     # -----------------------------------
     os.makedirs("results", exist_ok=True)
 
-    # -----------------------------------
-    # STEP 3: setup memory tracking
-    # -----------------------------------
-    process = psutil.Process(os.getpid())
-
     results = []
 
     # -----------------------------------
-    # STEP 4: run algorithm (10 trials)
+    # STEP 3: run algorithm (10 trials)
     # -----------------------------------
     for trial in range(1, 11):
 
         print(f"Running Hierarchical trial {trial}")
-
-        # memory before running algorithm
-        mem_before = process.memory_info().rss / (1024 ** 2)
 
         # start timing
         start = time.perf_counter()
@@ -89,12 +95,6 @@ def main():
         # end timing
         runtime = time.perf_counter() - start
 
-        # memory after running algorithm
-        mem_after = process.memory_info().rss / (1024 ** 2)
-
-        # compute memory used
-        memory_used = max(mem_after - mem_before, 0)
-
         # compute metrics
         sse = calculate_sse(X, labels)
         sil = silhouette_score(X, labels)
@@ -106,13 +106,12 @@ def main():
             "n": len(X),
             "trial": trial,
             "runtime_seconds": runtime,
-            "memory_mb": memory_used,
             "sse": sse,
             "silhouette_score": sil
         })
 
     # -----------------------------------
-    # STEP 5: save raw results
+    # STEP 4: save raw results
     # -----------------------------------
     df = pd.DataFrame(results)
     df.to_csv("results/hierarchical_iris_results.csv", index=False)
@@ -121,22 +120,18 @@ def main():
     print(df)
 
     # -----------------------------------
-    # STEP 6: compute summary
+    # STEP 5: compute summary
     # -----------------------------------
     summary_df = df.groupby(
         ["algorithm", "dataset", "n"],
         as_index=False
     ).agg({
         "runtime_seconds": "mean",
-        "memory_mb": "mean",
         "sse": "mean",
         "silhouette_score": "mean"
     })
 
     summary_df = summary_df.round(4)
-
-    # ensure memory is non-negative
-    summary_df["memory_mb"] = summary_df["memory_mb"].clip(lower=0)
 
     summary_df.to_csv("results/hierarchical_iris_summary.csv", index=False)
 
@@ -144,7 +139,7 @@ def main():
     print(summary_df)
 
     # -----------------------------------
-    # STEP 7: generate Iris graphs ONLY
+    # STEP 6: generate Iris graphs ONLY
     # -----------------------------------
     import hierarchical_graphs
     hierarchical_graphs.generate_iris_graphs()

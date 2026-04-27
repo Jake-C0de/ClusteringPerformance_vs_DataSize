@@ -1,2 +1,2 @@
-algorithm,dataset,n,runtime_seconds,memory_mb,sse,silhouette_score
-Firefly,Iris,150,6.1776,0.0074,456.6014,0.3397
+algorithm,dataset,n,runtime_seconds,sse,silhouette_score
+Firefly,Iris,150,6.184,457.5679,0.3498

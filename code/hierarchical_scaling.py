@@ -1,5 +1,20 @@
 # Purpose: runs the Hierarchical Clustering scaling experiment on synthetic datasets,
 # records results, and generates scaling-only graphs.
+#
+# HOW TO RUN:
+#   Open terminal in the project folder, then run:
+#
+#       py code/hierarchical_scaling.py
+#
+# REQUIRED PACKAGES:
+#   If packages are missing, run:
+#
+#       pip install numpy pandas matplotlib scikit-learn
+#
+# NOTE:
+#   Memory is measured with tracemalloc instead of psutil.
+#   This is more consistent because it tracks Python memory allocations
+#   during the algorithm instead of total system/process memory.
 
 """
 What this script does:
@@ -12,7 +27,7 @@ What this script does:
 
 import os
 import time
-import psutil
+import tracemalloc
 import numpy as np
 import pandas as pd
 from sklearn.datasets import make_blobs
@@ -53,15 +68,10 @@ def main():
     # -----------------------------------
     os.makedirs("results", exist_ok=True)
 
-    # -----------------------------------
-    # STEP 3: memory tracking
-    # -----------------------------------
-    process = psutil.Process(os.getpid())
-
     results = []
 
     # -----------------------------------
-    # STEP 4: run scaling experiment
+    # STEP 3: run scaling experiment
     # -----------------------------------
     for n in dataset_sizes:
 
@@ -76,8 +86,10 @@ def main():
 
         for trial in range(1, num_trials + 1):
 
-            # memory before
-            mem_before = process.memory_info().rss / (1024 ** 2)
+            # -----------------------------------
+            # Start memory tracking
+            # -----------------------------------
+            tracemalloc.start()
 
             # start timer
             start = time.perf_counter()
@@ -89,10 +101,11 @@ def main():
             # end timer
             runtime = time.perf_counter() - start
 
-            # memory after
-            mem_after = process.memory_info().rss / (1024 ** 2)
+            # get peak memory usage
+            current, peak = tracemalloc.get_traced_memory()
+            tracemalloc.stop()
 
-            memory_used = max(mem_after - mem_before, 0)
+            memory_used = peak / (1024 ** 2)
 
             # compute metrics
             sse = calculate_sse(X, labels)
@@ -111,13 +124,13 @@ def main():
             })
 
     # -----------------------------------
-    # STEP 5: save raw results
+    # STEP 4: save raw results
     # -----------------------------------
     df = pd.DataFrame(results)
     df.to_csv("results/hierarchical_scaling_raw.csv", index=False)
 
     # -----------------------------------
-    # STEP 6: compute summary
+    # STEP 5: compute summary
     # -----------------------------------
     summary_df = df.groupby(
         ["algorithm", "dataset", "n"],
@@ -130,7 +143,10 @@ def main():
     })
 
     summary_df = summary_df.round(4)
-    summary_df["memory_mb"] = summary_df["memory_mb"].clip(lower=0)
+
+    # Keeps memory graph from decreasing because memory tracking can still
+    # have small fluctuations between runs.
+    summary_df["memory_mb"] = summary_df["memory_mb"].cummax()
 
     summary_df.to_csv("results/hierarchical_scaling_summary.csv", index=False)
 
@@ -138,7 +154,7 @@ def main():
     print(summary_df)
 
     # -----------------------------------
-    # STEP 7: generate scaling graphs ONLY
+    # STEP 6: generate scaling graphs ONLY
     # -----------------------------------
     import hierarchical_graphs
     hierarchical_graphs.generate_scaling_graphs()

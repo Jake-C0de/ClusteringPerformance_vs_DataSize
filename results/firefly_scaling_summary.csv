@@ -1,6 +1,6 @@
 algorithm,dataset,n,runtime_seconds,memory_mb,sse,silhouette_score
-Firefly,Synthetic,200,8.0815,0.0182,3253.3943,0.8061
-Firefly,Synthetic,500,20.1623,0.0091,9154.7812,0.8335
-Firefly,Synthetic,1000,40.1018,0.0365,23441.4124,0.7568
-Firefly,Synthetic,2000,80.1768,0.0208,37202.1877,0.7038
-Firefly,Synthetic,5000,201.4258,0.1406,107931.17,0.7593
+Firefly,Synthetic,200,25.5911,0.0307,4243.3452,0.7119
+Firefly,Synthetic,500,65.9108,0.0663,7467.062,0.8438
+Firefly,Synthetic,1000,132.6107,0.1298,22469.4127,0.8089
+Firefly,Synthetic,2000,276.6231,0.2932,56910.7526,0.5371
+Firefly,Synthetic,5000,756.5137,0.7002,129743.4572,0.5515

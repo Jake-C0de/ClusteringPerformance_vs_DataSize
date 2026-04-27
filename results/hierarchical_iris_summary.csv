@@ -1,2 +1,2 @@
-algorithm,dataset,n,runtime_seconds,memory_mb,sse,silhouette_score
-Hierarchical,Iris,150,0.0039,0.1238,148.8763,0.4467
+algorithm,dataset,n,runtime_seconds,sse,silhouette_score
+Hierarchical,Iris,150,0.0023,148.8763,0.4467
